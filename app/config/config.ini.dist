@@ -1,0 +1,8 @@
+[database]
+host="localhost"
+user="user"
+password="password"
+database="yablog"
+
+[url]
+default_url = 'posts/list'
