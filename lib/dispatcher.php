@@ -60,7 +60,7 @@ class Dispatcher {
         if ($url == '/') {//if this is the root url redirect to the dfault controller/action
             Url::redirect($url_conf['default_url']);
         }
-        if ($route === false) {//if no route is matched show 404
+        elseif ($route === false) {//if no route is matched show 404
             $this->show_404();
         }
 
@@ -90,8 +90,7 @@ class Dispatcher {
      * Sends a 404 header
      */
     public function show_404() {
-        header('HTTP/1.0 404 Not Found');
-        echo "Page not found";
+        Url::show_404();
     }
 
 }
