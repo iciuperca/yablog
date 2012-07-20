@@ -10,11 +10,18 @@ require_once SYSTEMFOLDER . '/config.php';
 
 class Url {
 
+    /**
+     * Redirects to a given url
+     *
+     * @param string $url The url to which the redirection will be made
+     * @param bool $perm Sets if the permanent header will be sent.
+     */
     static function redirect($url, $perm = false) {
         if ($perm) {
             header('HTTP/1.1 301 Moved Permanently');
         }
         header('Location: ' . $url);
+        exit();
     }
 
 }
