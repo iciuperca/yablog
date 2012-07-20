@@ -24,6 +24,16 @@ class Url {
         exit();
     }
 
+    /**
+     * Sends a 404 header and displayes a message
+     * @param string $message The optional message to be displayed.
+     */
+    static function show_404($message = '404 Page not found') {
+        header('HTTP/1.1 301 Moved Permanently');
+        echo $message;
+        exit();
+    }
+
 }
 
 ?>
