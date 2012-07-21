@@ -13,7 +13,7 @@ class Post_Model extends Model {
      * @return array The result of teh query
      */
     function get_all_posts() {
-        $posts = $this->getAssocArray('SELECT post_id, title FROM posts');
+        $posts = $this->getAssocArray('SELECT * FROM posts');
         return $posts;
     }
 
