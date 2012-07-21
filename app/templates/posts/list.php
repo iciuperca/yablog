@@ -4,7 +4,7 @@
 <ul>
     <?php foreach ($posts as $post): ?>
         <li>
-            <a href="/show/<?php echo $post['slug'] ?>"> <?php echo $post['title'] ?></a>
+            <a href="/post/show/<?php echo $post['slug'] ?>"> <?php echo $post['title'] ?></a>
         </li>
     <?php endforeach; ?>
 </ul>
