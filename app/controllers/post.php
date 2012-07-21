@@ -20,6 +20,9 @@ class Post extends Controler {
 
     public function showAction($slug) {
         $post = $this->post->get_by_slug($slug);
+        if(empty($post)) {
+            $this->show_404();
+        }
         $data['post'] = $post;
         $data['title'] = $post['title'];
         $this->render('app/templates/posts/show.php', $data);
