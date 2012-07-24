@@ -1,8 +1,14 @@
 <?php
+/**
+ * @author Ionut Cristian Ciuperca <ionut.ciuperca@gmail.com>
+ */
+
+require_once SYSTEMFOLDER.'/session.php';
 class Controler {
 
+    public $session;
     public function __construct() {
-
+        $this->session = Session::getInstance();
     }
 
     /**
@@ -11,12 +17,14 @@ class Controler {
      * @param string $template The path to the template file.
      * @param mixed $data An array of variables to be passed to the template
      */
-    public function render($template, $data) {
-        extract($data);
+    public function render($template, $data = null) {
+        if(!is_null($data)) {
+            extract($data);
+        }
         ob_start();
         require_once $template;
         $_content = ob_get_clean();
-        include $_extends;
+        include_once $_extends;
     }
 
     /**
