@@ -8,6 +8,7 @@ class Post extends Controler {
     private $post;
 
     public function __construct() {
+        parent::__construct();
         $this->post = new Post_Model();
     }
 
