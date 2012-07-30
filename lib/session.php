@@ -65,12 +65,12 @@ class Session {
      * Gets the item strored under the speciffied key.
      *
      * @param string $item_name
-     * @return mixed
-     * @throws Exception if the item is not set
+     * @return mixed The data in session or null
      */
     public function getItem($item_name) {
         if(!isset($_SESSION[$item_name])) {
-            throw new Exception("Item {$item_name} does not exist.");
+            //throw new Exception("Item {$item_name} does not exist.");
+            return null;
         } else {
             return $_SESSION[$item_name];
         }

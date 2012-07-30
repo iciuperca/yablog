@@ -14,6 +14,12 @@
             <div class="row">
                 <div class="span12">
                     <h1>YaBlog</h1>
+                    <?php if(isset($user)): ?>
+                    <span>Welcome <?php echo $user['username'] ?></span>&nbsp;<span><a href="/user/logout">Logout</a></span>
+                    <?php if($user['is_admin']){require_once(TEMPLATES.'/admin/admin_bar.php');} ;?>
+                    <?php else: ?>
+                    <span>Welcome guest</span>&nbsp;<span><a href="/user/login">Login</a></span>
+                    <?php endif; ?>
                 </div>
             </div>
 

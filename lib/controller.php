@@ -21,6 +21,7 @@ class Controler {
         if(!is_null($data)) {
             extract($data);
         }
+        $user = $this->session->getItem('user');//TODO: move this from here
         ob_start();
         require_once $template;
         $_content = ob_get_clean();
