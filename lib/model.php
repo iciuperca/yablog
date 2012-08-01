@@ -50,5 +50,59 @@ class Model extends PDO {
             return $res[0];
         }
     }
+    
+    /**
+     * Gets the max id from a table from 
+     * 
+     * @param string $table
+     * @param string $pk
+     * @return mixed
+     */
+    
+    public function getMaxId($table, $pk) {
+        $sql = "SELECT MAX(`{$pk}`) AS `max_id` FROM {$table}";
+        try{
+            $row = $this->getAssocRow($sql);
+        }catch (Exception $e) {
+            echo $e->getMessage(); 
+        }
+        
+        if(isset($row['max_id'])) {
+            return $row['max_id'];
+        }else {
+            return false;
+        }
+        
+    }
+    
+    /**
+     * Transforms a string in a url friendly format
+     * @param string $title
+     * @param int $length
+     * @return string The sligified string
+     */
+    public function slugify($title, $length=null) {
+
+        $text = trim($title);
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+        // transliterate
+        if (function_exists('iconv')) {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+        //trasform to lower
+        $text = strtolower($text);
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+        if (empty($text)) {
+            return 'n-a';
+        }
+        //truncate to the given length
+        if(!is_null($length)){
+            $text = substr($text, 0, $length);
+        }
+        
+        return $text;
+    }
 
 }
