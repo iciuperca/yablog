@@ -2,8 +2,8 @@
 
 // define system constants
 
-define ('APPFOLDER', 'app');
-define ('SYSTEMFOLDER', 'lib');
+define ('APPFOLDER', __DIR__ . '/app');
+define ('SYSTEMFOLDER', __DIR__ . '/lib');
 define ('CONTROLLERS', APPFOLDER . '/controllers');
 define ('MODELS', APPFOLDER . '/models');
 define ('TEMPLATES', APPFOLDER . '/templates');
