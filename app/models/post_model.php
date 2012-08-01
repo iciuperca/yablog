@@ -78,6 +78,29 @@ class Post_Model extends Model {
         
         return $post[':slug'];
     }
+    
+        public function update($title, $content, $slug, $is_published = false) {
+        $sql = "
+            UPDATE {$this->_table} SET
+            
+                `title`=:title ,
+                `preview`=:preview ,
+                `content`=:content ,
+                `is_published`=:is_published
+            WHERE `slug`=:slug
+            ";
+        $post = array(
+            ':title' => $title,
+            ':preview' => $this->truncate($content, 300),
+            ':content' => $content,
+            ':is_published' => $is_published,
+            ':slug' => $slug,
+            
+        );
+        $pdo = $this->prepare($sql);
+        $pdo->execute($post);
+
+    }
 
     private function truncate($string, $width) {
         $parts = preg_split('/([\s\n\r]+)/', $string, null, PREG_SPLIT_DELIM_CAPTURE);

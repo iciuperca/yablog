@@ -84,5 +84,60 @@ class Post extends Controler {
             $this->render('app/templates/posts/create.php', $data);
         }
     }
+    
+        public function editAction($slug) {
+        $current_user = $this->session->getItem('user');
+        if (is_null($current_user) || !$current_user['is_admin']) {
+            $this->show_404();
+        }
+        
+        $ed_post = $this->post->getBySlug($slug);
+        
+        if(empty($ed_post)) {
+            $this->show_404();
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            extract(array_map('trim', $_POST));
+            if (!isset($is_published)) {
+                $is_published = false;
+            }else {
+                $is_published = true;
+            }
+            $fields = array(
+                'title' => array(
+                    'label' => 'Title',
+                    'value' => $title,
+                    'rules' => 'required|isAlphaNum|between[5,255]',
+                ),
+                'content' => array(
+                    'label' => 'Content',
+                    'value' => $content,
+                    'rules' => 'required|minLength[5]|maxLength[5000]',
+                ),
+            );
+
+
+            $validation = new FormValidator($fields);
+            if (!$validation->run()) {
+                $data = compact('title', 'content', 'is_published');
+                $data['_title'] = 'Edit post';
+                $data['errors'] = $validation->getErrors();
+                $this->render('app/templates/posts/create.php', $data);
+            } else {
+
+                $this->post->update($title, $content, $slug, $is_published);
+
+                $this->session->setFlash('success', 'Post updated');
+                Url::redirect('/post/edit/'.$slug);
+            }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $data['_title'] = 'Edit post';
+            $data['title'] = $ed_post['title'];
+            $data['content'] = $ed_post['content'];
+            $data['is_published'] = $ed_post['is_published'];
+            $this->render('app/templates/posts/create.php', $data);
+        }
+    }
+
 
 }
