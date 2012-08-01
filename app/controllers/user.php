@@ -41,7 +41,7 @@ class User extends Controler {
                 Url::redirect($this->config['default_url']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $data['title'] = 'User login';
+            $data['_title'] = 'User login';
             $hasError = $this->session->hasFlash('error');
             if($hasError) {
                 $data['errors'] = $this->session->getFlash('error');

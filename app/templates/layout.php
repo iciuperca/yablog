@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title><?php echo $title ?></title>
+        <title><?php echo $_title ?></title>
         <link href="/static/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/static/css/main.css" type="text/css" />
 
