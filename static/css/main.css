@@ -17,3 +17,8 @@ h3 {margin: 10px 0 10px 0;}
 input[name=login-submit] {
     display: block;
 }
+
+.errors {
+    font-size: 1.5em;
+    color: crimson;
+}
