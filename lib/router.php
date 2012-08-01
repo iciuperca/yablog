@@ -12,17 +12,44 @@ class Router {
     const REGEX_ALPHANUMERIC = "([0-9a-zA-Z_-]+?)";
     const REGEX_STATIC = "%s";
 
+    /**
+     * Array containing the routes
+     * 
+     * @var mixed 
+     */
     protected $routes = array();
+    
+    /**
+     * The bse url
+     * 
+     * @var string 
+     */
     protected $baseUrl = '';
 
+    /**
+     * Sets the base url of the website.
+     * 
+     * @param string $baseUrl The base url of the website
+     */
     public function setBaseUrl($baseUrl) {
         $this->baseUrl = preg_quote($baseUrl, '@');
     }
 
+    /**
+     * Add a route to the routes array
+     * 
+     * @param string $route
+     * @param mixed $options
+     */
     public function addRoute($route, $options = array()) {
         $this->routes[] = array('pattern' => $this->_parseRoute($route), 'options' => $options);
     }
 
+    /**
+     * 
+     * @param string $route
+     * @return string the compiled toute
+     */
     protected function _parseRoute($route) {
         $baseUrl = $this->baseUrl;
         if ($route == '/') {
@@ -89,6 +116,11 @@ class Router {
         return $regex;
     }
 
+    /**
+     * 
+     * @param string $request The request string
+     * @return mixed returnes the matched route or false
+     */
     public function getRoute($request) {
         $matches = array();
 
@@ -108,6 +140,10 @@ class Router {
         return false;
     }
 
+    /**
+     * 
+     * @param string $param
+     */
     public function normalize(&$param) {
         $param = preg_replace("/[^a-zA-Z0-9]/", "", $param);
     }
